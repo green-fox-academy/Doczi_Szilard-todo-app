@@ -21,10 +21,14 @@ class Controller():
 				model.print_list()
 			if self.list_argv[0] == '-a':
 				if len(self.list_argv) == 1:
-					print('Unable to add: no task provided')
+					view.print_unable()
 				else:
 					model.add(self.list_argv[1])
 					model.writer()
+			if self.list_argv[0] == '-r':
+				model.remove(int(self.list_argv[1]))
+				model.writer()
+
 
 			# if( self.list_argv[0] == '-r' ):
 			# if( self.list_argv[0] == '-c' ):
@@ -58,20 +62,19 @@ class Model():
 	def add(self, thing):
 	        self.to_do.append("0" + " + " + thing + '\n')
 
+	def remove(self, element):
+		del self.to_do[element]
+
 class View():
-
-	#def __init__(self):
-
 
 	def print_welcome_page(self):
 		print("Python Todo application\n=======================\n\nCommand line arguments:\n-l   Lists all the tasks\n-a   Adds a new taskA\n-r   Removes an task\n-c   Completes an task")
 
-
+	def print_unable(self):
+		print('Unable to add: no task provided')
 
 view = View()
 model = Model()
 controller = Controller()
-
-
 
 controller.arg_reader()
