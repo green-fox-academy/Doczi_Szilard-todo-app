@@ -13,34 +13,27 @@ class Controller():
 		else:
 			self.list_argv = sys.argv[1:]
 
-
 	def control(self):
 		if len(self.list_argv) == 0:
 			view.print_welcome_page()
 		else:
 			if self.list_argv[0] == '-l':
-				self.print_list()
+				model.print_list()
+			if self.list_argv[0] == '-a':
+				if len(self.list_argv) == 1:
+					print('Unable to add: no task provided')
+				else:
+					model.add(self.list_argv[1])
+					model.writer()
 
-	def print_list(self):
-		if len(model.to_do) == 0:
-		    print('Nothing to do today')
-		else:
-			for i in range(len(model.to_do)):
-				print(i + 1, model.to_do[i][:-1])
-
-			# if( self.list_argv[0] == '-a' ):
 			# if( self.list_argv[0] == '-r' ):
 			# if( self.list_argv[0] == '-c' ):
-
-#arguments = arg_reader()
-
 
 class Model():
 
 	def __init__(self):
 		self.to_do = ""
 		self.reader()
-
 
 	def reader(self):
 		try:
@@ -50,6 +43,20 @@ class Model():
 		except:
 			self.to_do = []
 
+	def writer(self):
+		myfile = open('database.txt', 'w')
+		myfile.writelines(self.to_do)
+		myfile.close()
+
+	def print_list(self):
+		if len(self.to_do) == 0:
+			print('Nothing to do today')
+		else:
+			for i in range(len(self.to_do)):
+				print(i + 1, self.to_do[i][1:-1])
+
+	def add(self, thing):
+	        self.to_do.append("0" + " + " + thing + '\n')
 
 class View():
 
