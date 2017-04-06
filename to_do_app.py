@@ -35,6 +35,9 @@ class Controller():
 					model.writer()
 			except:
 				view.print_unable_to_remove()
+		elif self.list_argv[0] == '-c':
+			model.check(int(self.list_argv[1]))
+			model.writer()
 		else:
 			view.print_Unsupported()
 			view.print_welcome_page()
@@ -69,10 +72,13 @@ class Model():
 				print(i + 1, self.to_do[i][:-1])
 
 	def add(self, thing):
-	        self.to_do.append("0" + " + " + thing + '\n')
+	        self.to_do.append("[ ]" + " + " + thing + '\n')
 
 	def remove(self, element):
 		del self.to_do[element]
+
+	def check(self, element):
+		self.to_do[element] = "[x]" + self.to_do[element][3:-1] + '\n'
 
 class View():
 
