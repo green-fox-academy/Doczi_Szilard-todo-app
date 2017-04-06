@@ -1,22 +1,27 @@
 import sys
 
-#class Controller():
+#myfile = open('duplicated-chars.txt', 'r')
+
+class Controller():
 	#def __init__(self, View):
 
 
-	# def arg_reader(self):
-	# 	if len(sys.argv) == 1:
-	# 		return []
-	# 	else:
-	# 		return sys.argv[1:]
+	def arg_reader(self):
+		self.list_argv = []
+		if len(sys.argv) <= 1:
+			self.list_argv = []
+		else:
+			self.list_argv = sys.argv[1:]
+
+		if len(self.list_argv) == 0:
+			view.print_welcome_page()
+		else:
+			pass
+			# if( arguments[0] == '-l' ):
+			# 	print('Addolunk ilyet', arguments[1])
 
 #arguments = arg_reader()
 
-# if len(arguments) == 0:
-# 	print('help text')
-# else:
-# 	if( arguments[0] == '-l' ):
-# 		print('Addolunk ilyet', arguments[1])
 
 
 #class Model(Controller):
@@ -26,10 +31,12 @@ class View():
 	#def __init__(self):
 
 
-	def printer(self):
+	def print_welcome_page(self):
 		print("Python Todo application\n=======================\n\nCommand line arguments:\n-l   Lists all the tasks\n-a   Adds a new taskA\n-r   Removes an task\n-c   Completes an task")
 
 
 
 view = View()
-view.printer()
+controller = Controller()
+
+controller.arg_reader()
