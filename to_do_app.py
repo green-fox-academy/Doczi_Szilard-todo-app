@@ -26,11 +26,17 @@ class Controller():
 					model.add(self.list_argv[1])
 					model.writer()
 			if self.list_argv[0] == '-r':
-				model.remove(int(self.list_argv[1]))
-				model.writer()
+				try:
+					if len(self.list_argv) == 1:
+						view.print_unable_to_remove()
+					if 	int(self.list_argv[1]) < 1 or int(self.list_argv[1]) > len(model.to_do):
+						view.print_unable_to_remove()
+					else:
+						model.remove(int(self.list_argv[1]))
+						model.writer()
+				except:
+					view.print_unable_to_remove()
 
-
-			# if( self.list_argv[0] == '-r' ):
 			# if( self.list_argv[0] == '-c' ):
 
 class Model():
@@ -72,6 +78,9 @@ class View():
 
 	def print_unable(self):
 		print('Unable to add: no task provided')
+
+	def print_unable_to_remove(self):
+		print('Unable to remove: no index provided')
 
 view = View()
 model = Model()
