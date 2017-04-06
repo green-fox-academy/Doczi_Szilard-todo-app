@@ -36,8 +36,16 @@ class Controller():
 			except:
 				view.print_unable_to_remove()
 		elif self.list_argv[0] == '-c':
-			model.check(int(self.list_argv[1]))
-			model.writer()
+			try:
+				if len(self.list_argv) == 1:
+					view.print_check()
+				if 	int(self.list_argv[1]) < 1 or int(self.list_argv[1]) > len(model.to_do):
+					view.print_check()
+				else:
+					model.check(int(self.list_argv[1]))
+					model.writer()
+			except:
+				view.print_check()
 		else:
 			view.print_Unsupported()
 			view.print_welcome_page()
@@ -89,10 +97,13 @@ class View():
 		print('Unable to add: no task provided')
 
 	def print_unable_to_remove(self):
-		print('Unable to remove: no index provided')
+		print('Unable to remove')
 
 	def print_Unsupported(self):
-		print("\n\tUnsupported argument\n")
+		print("\nUnsupported argument\n")
+
+	def print_check(self):
+		print("Unable to check")
 
 view = View()
 model = Model()
