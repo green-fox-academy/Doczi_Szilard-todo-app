@@ -16,26 +16,29 @@ class Controller():
 	def control(self):
 		if len(self.list_argv) == 0:
 			view.print_welcome_page()
-		else:
-			if self.list_argv[0] == '-l':
-				model.print_list()
-			if self.list_argv[0] == '-a':
+		elif self.list_argv[0] == '-l':
+			model.print_list()
+		elif self.list_argv[0] == '-a':
+			if len(self.list_argv) == 1:
+				view.print_unable()
+			else:
+				model.add(self.list_argv[1])
+				model.writer()
+		elif self.list_argv[0] == '-r':
+			try:
 				if len(self.list_argv) == 1:
-					view.print_unable()
-				else:
-					model.add(self.list_argv[1])
-					model.writer()
-			if self.list_argv[0] == '-r':
-				try:
-					if len(self.list_argv) == 1:
-						view.print_unable_to_remove()
-					if 	int(self.list_argv[1]) < 1 or int(self.list_argv[1]) > len(model.to_do):
-						view.print_unable_to_remove()
-					else:
-						model.remove(int(self.list_argv[1]))
-						model.writer()
-				except:
 					view.print_unable_to_remove()
+				if 	int(self.list_argv[1]) < 1 or int(self.list_argv[1]) > len(model.to_do):
+					view.print_unable_to_remove()
+				else:
+					model.remove(int(self.list_argv[1]))
+					model.writer()
+			except:
+				view.print_unable_to_remove()
+		else:
+			view.print_Unsupported()
+			view.print_welcome_page()
+
 
 			# if( self.list_argv[0] == '-c' ):
 
@@ -63,7 +66,7 @@ class Model():
 			print('Nothing to do today')
 		else:
 			for i in range(len(self.to_do)):
-				print(i + 1, self.to_do[i][1:-1])
+				print(i + 1, self.to_do[i][:-1])
 
 	def add(self, thing):
 	        self.to_do.append("0" + " + " + thing + '\n')
@@ -81,6 +84,9 @@ class View():
 
 	def print_unable_to_remove(self):
 		print('Unable to remove: no index provided')
+
+	def print_Unsupported(self):
+		print("\n\tUnsupported argument\n")
 
 view = View()
 model = Model()

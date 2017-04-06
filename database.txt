@@ -1,5 +1,5 @@
-1 + Fight with enemies
-0 + Occupy the kingdom
-0 + Defeat the archenemy
-0 + Get work in Blizzard
-0 + Get Azzeroth's epic sword
+[ ] + Fight with enemies
+[ ] + Occupy the kingdom
+[ ] + Defeat the archenemy
+[ ] + Get work in Blizzard
+[ ] + Get Azzeroth's epic sword
