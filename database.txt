@@ -1,4 +1,4 @@
-0 + Fight with enemies
-1 + Occupy the kingdom
-0 + Defeat the archenemy
-0 + Get work in Blizzard
++ Fight with enemies
++ Occupy the kingdom
++ Defeat the archenemy
++ Get work in Blizzard
